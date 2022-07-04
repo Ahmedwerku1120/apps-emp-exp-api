@@ -1,0 +1,42 @@
+#%RAML 1.0 Library
+
+types:
+  Employee: !include ../DataTypes/EmpdataType.raml
+
+traits:
+  errorResponse: !include ../Traits/errorResponsTrait.raml
+  OAuthToken: 
+    headers:
+      Authorization:
+      Token:
+        required: true
+        description: Used to send a valid OAuth2 Acccess Token
+        type: string
+
+resourceTypes:
+  employeeCollection:
+    get:
+      is: [errorResponse, OAuthToken]
+      description: This is used to fetch all <<resourcePathName>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: Employee
+              example: |
+                <<exampleReference1>>
+    post:
+      is: [errorResponse, OAuthToken]
+      description: This is used to create <<resourcePathName>>
+      body:
+        application/json:
+          type: Employee 
+          example: |
+            <<exampleReference2>>
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                <<exampleReference3>>
+

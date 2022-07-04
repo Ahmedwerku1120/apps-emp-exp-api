@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="apps-emp-exp-api-suite.xml" />
+	<munit:test name="get:\employees:apps-emp-exp-api-config-test" doc:id="572a88b9-647a-4f9a-b6f6-0442115bb8ff" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select" doc:id="659b184c-9d3f-46b9-bfcf-ba1a8fc96d92" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="73c756ed-3122-4fbf-afe8-fd8e54f69009" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://getemployeesappsempexpapiconfigtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="TotalRespCount" value="#[output application/java --- readUrl('classpath://getemployeesappsempexpapiconfigtest\mock_variable_.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeesappsempexpapiconfigtest\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="8501860f-3a14-4dfd-b059-3463ea2cd869" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getemployeesappsempexpapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getemployeesappsempexpapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeesappsempexpapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\employees:apps-emp-exp-api-config" doc:id="0018c83e-14db-4b71-9292-dc93f0427e60" name="get:\employees:apps-emp-exp-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="e1cf59f2-0120-4091-adeb-63bdc4310154" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getemployeesappsempexpapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="post:\employees:application\json:apps-emp-exp-api-config-test" doc:id="10637ad3-f297-4129-90f1-7db8ec5d249e" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert" doc:id="83da7ea6-e733-4572-a8d8-da9e187bb1e5" processor="db:insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="55c97f73-6f2b-4ea3-ba06-548ce0e9fc51" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="rootMessage" value="#[readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\mock_variable_1.dwl')]" />
+						<munit-tools:variable key="counter" value="#[readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\mock_variable_2.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="c95ff3f8-7068-4637-a88f-a162bb1f79e7" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postemployeesapplicationjsonappsempexpapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\employees:application\json:apps-emp-exp-api-config" doc:id="c781bc5a-3b75-4ddc-9c34-2d71cff54d3a" name="post:\employees:application\json:apps-emp-exp-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="c007d5b4-4f07-4928-a691-9678c0c10280" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postemployeesapplicationjsonappsempexpapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="put:\employees\(ID):application\json:apps-emp-exp-api-config-test" doc:id="8f18e702-f770-4b7d-8b93-a43e4b6287c1" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="70cb4f87-c973-4b80-8ccd-fba21faf4a85" processor="db:update">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="eaaa765e-2d8c-460e-a136-b96fd641dcfb" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://putemployeesIDapplicationjsonappsempexpapiconfigtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putemployeesIDapplicationjsonappsempexpapiconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="PNumber" value="#[output application/java --- readUrl('classpath://putemployeesIDapplicationjsonappsempexpapiconfigtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="51d665a2-6c8d-4108-8b4c-f9615da9c0be" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putemployeesIDapplicationjsonappsempexpapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putemployeesIDapplicationjsonappsempexpapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putemployeesIDapplicationjsonappsempexpapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to put:\employees\(ID):application\json:apps-emp-exp-api-config" doc:id="57040324-4513-4c6a-8e30-240e4f1c3c60" name="put:\employees\(ID):application\json:apps-emp-exp-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="a194b4c1-5f68-48fa-8b06-55d9ef9c8ad9" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putemployeesIDapplicationjsonappsempexpapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\employees\(ID):apps-emp-exp-api-config-test" doc:id="078482e5-cf0a-4480-9cf5-40289617d71c" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="4a1510b5-5b68-44ad-8f02-b5a0b24f106b" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getemployeesIDappsempexpapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getemployeesIDappsempexpapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeesIDappsempexpapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\employees\(ID):apps-emp-exp-api-config" doc:id="76c25ddc-6479-4c74-b37a-bb2698ecfb74" name="get:\employees\(ID):apps-emp-exp-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="be60c476-d614-4285-8864-ee849ffea02d" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getemployeesIDappsempexpapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="apps-emp-exp-api-main-test" doc:id="3b39e13b-4fb0-47a4-bff6-7a86be376ece" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock APIkit Router" doc:id="73f0d00f-8836-40b5-a6cc-a0282b52977d" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="14fdbd1e-cb6a-4e4a-93bc-64fc44c86e2c" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://appsempexpapimaintest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://appsempexpapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://appsempexpapimaintest\mock_variable_1.dwl')]" />
+						<munit-tools:variable key="PNumber" value="#[output application/java --- readUrl('classpath://appsempexpapimaintest\mock_variable_2.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="fe3e3180-e57b-4113-b5b5-c1703691b721" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://appsempexpapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://appsempexpapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to apps-emp-exp-api-main" doc:id="7e3c5a14-6c2e-4ea9-a33f-d4f29cdc35c1" name="apps-emp-exp-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="4b8c87ac-404b-4af7-9a3c-8fb31558d3f5" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import appsempexpapimaintest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

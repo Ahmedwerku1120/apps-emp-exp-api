@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="apps-emp-exp-api-test-suite.xml" />
+	<munit:test name="apps-emp-exp-api-test-suite-apps-emp-exp-api-mainTest_badRequest" doc:id="e622497f-03a9-46a0-917d-31d985e95799" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5fc2eac7-eed6-4c27-955b-9df51aa182a8" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="14fdbd1e-cb6a-4e4a-93bc-64fc44c86e2c" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="0fbf8bf6-f513-432d-9947-614127492bc3" >
+				<flow-ref doc:name="Flow-ref to apps-emp-exp-api-main" doc:id="1991664b-7767-46b4-a158-41cb8c4cff45" name="apps-emp-exp-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="6d269454-2c2c-49b4-a302-1c8ea0503cbe" >
+						<logger level="INFO" doc:name="Logger" doc:id="5ae2867c-9a47-4950-9cd5-cda1a408f90f" message="Error occured"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="06632fce-8b97-47e2-b081-90adec204330" processor="on-error-propagate" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="APIKIT:BAD_REQUEST" attributeName="type" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+<munit:test name="apps-emp-exp-api-test-suite-apps-emp-exp-api-mainTest_notFound" doc:id="e622497f-03a9-46a0-917d-31d985e95799" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5fc2eac7-eed6-4c27-955b-9df51aa182a8" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="14fdbd1e-cb6a-4e4a-93bc-64fc44c86e2c" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="0fbf8bf6-f513-432d-9947-614127492bc3" >
+				<flow-ref doc:name="Flow-ref to apps-emp-exp-api-main" doc:id="1991664b-7767-46b4-a158-41cb8c4cff45" name="apps-emp-exp-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="6d269454-2c2c-49b4-a302-1c8ea0503cbe" >
+						<logger level="INFO" doc:name="Logger" doc:id="5ae2867c-9a47-4950-9cd5-cda1a408f90f" message="Error occured"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="06632fce-8b97-47e2-b081-90adec204330" processor="on-error-propagate" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="APIKIT:NOT_FOUND" attributeName="type" />
+				</munit-tools:with-attributes>
+
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="apps-emp-exp-api-test-suite-apps-emp-exp-api-mainTest_notAllowed" doc:id="e622497f-03a9-46a0-917d-31d985e95799" description="Test">
+		<munit:behavior>
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5fc2eac7-eed6-4c27-955b-9df51aa182a8" processor="on-error-propagate">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="APIKIT:METHOD_NOT_ALLOWED" attributeName="type" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution>
+			<try doc:name="Try" doc:id="0fbf8bf6-f513-432d-9947-614127492bc3">
+				<flow-ref doc:name="Flow-ref to apps-emp-exp-api-main" doc:id="1991664b-7767-46b4-a158-41cb8c4cff45" name="apps-emp-exp-api-main" />
+				<error-handler>
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="6d269454-2c2c-49b4-a302-1c8ea0503cbe">
+						<logger level="INFO" doc:name="Logger" doc:id="5ae2867c-9a47-4950-9cd5-cda1a408f90f" message="Error occured" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:verify-call doc:name="Verify call" doc:id="06632fce-8b97-47e2-b081-90adec204330" processor="on-error-propagate" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="APIKIT:METHOD_NOT_ALLOWED" attributeName="type" />
+				</munit-tools:with-attributes>
+
+
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

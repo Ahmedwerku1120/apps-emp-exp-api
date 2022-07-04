@@ -1,0 +1,43 @@
+#%RAML 1.0
+title: Employee API
+description: API to sync employee data to DB
+mediaType:
+  - application/json
+version: V1
+protocols: 
+  - HTTP
+  - HTTPS
+documentation:
+  - !include /Documentations/documentation.raml
+securitySchemes:
+  OAuth2.0: !include /SecuritySchimes/securityScheme.raml
+
+uses: 
+  EmpCollection: resourceType/empLibraries.raml
+  EmpCollectionID: resourceType/empIDlibrary.raml
+
+/employees:
+  type: {EmpCollection.employeeCollection: {exampleReference1: !include /Examples/GetAllEmployeeExample.json, exampleReference2: !include Examples/PostEmplyeeRequestExample.json, exampleReference3: !include /Examples/PostEmplyeeResponseExample.json}}
+  get?:
+    queryParameters:
+      StartIndex?:
+        type: string
+        required: false
+        example: "10"
+      EndIndex?: 
+        type: string
+        required: false
+        example: "20"
+          
+      TotalRespCount:
+        type: string
+        required: false
+        example: "5"
+
+          
+  /{ID}:
+    type: {EmpCollectionID.employeeCollectionID: {exampleReference4: !include /Examples/updateEmplyeeRequestExample.json, exampleReference5: !include /Examples/GetEmployeeByID.json, exampleReference6: !include /Examples/GetEmployeeByID.json}}
+      
+
+      
+      

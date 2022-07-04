@@ -1,0 +1,86 @@
+[
+  {
+    "PersonNumber": "30314",
+    "FirstName": "Yashu",
+    "LastName": "Yalamanchi",
+    "WorkPhoneNumber": null,
+    "WorkEmail": "Yashu.Yalamanchi@IA.com",
+    "status": "completed",
+    "operation": "HIRE",
+    "message": "employee synced successfully",
+    "links": [
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30314",
+        "action": "GET",
+        "types": "application/json"
+      },
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30314",
+        "action": "POST",
+        "types": "application/json"
+      }
+    ]
+  },
+  {
+    "PersonNumber": "30239",
+    "status": "completed",
+    "operation": "UPDATE",
+    "message": "employee synced successfully",
+    "links": [
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30239",
+        "action": "GET",
+        "types": "application/json"
+      },
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30239",
+        "action": "POST",
+        "types": "application/json"
+      }
+    ]
+  },
+  {
+    "PersonNumber": "30303",
+    "status": "completed",
+    "operation": "TERMINATE",
+    "message": "employee synced successfully",
+    "links": [
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30311",
+        "action": "GET",
+        "types": "application/json"
+      },
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30311",
+        "action": "POST",
+        "types": "application/json"
+      }
+    ]
+  },
+  {
+    "PersonNumber": "30311",
+    "status": "completed",
+    "operation": "REHIRE",
+    "message": "employee synced successfully",
+    "links": [
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30311",
+        "action": "GET",
+        "types": "application/json"
+      },
+      {
+        "rel": "Employee",
+        "href": "https://localhost:8087/oracle/employee-sapi/employees/30311",
+        "action": "POST",
+        "types": "application/json"
+      }
+    ]
+  }
+]

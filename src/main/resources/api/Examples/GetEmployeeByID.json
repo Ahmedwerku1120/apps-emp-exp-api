@@ -1,0 +1,23 @@
+{
+ "Employees":
+    {
+      "LegalEntityId" : "300100003448002",
+      "FirstName": "Miranda",
+      "LastName": "Rachell",
+      "DisplayName" : "Miranda Kyle Rachell",
+      "WorkMobilePhoneNumber" : "581-993-0000",
+      "WorkEmail" : "miranda.kyle@oracle.com",
+      "AddressLine" : "Oracle Corporation",
+      "City" : "San Francisco",
+      "Region" : "California",
+      "Country" : "US",
+      "PostalCode": "94065",
+      "DateOfBirth": "1990-09-09",
+      "Gender" : "F",
+      "UserName":"rachell",
+      "department": "Integration",
+      "EffectiveStartDate" : "2016-04-13",
+      "HireDate" : "2016-04-13",
+      "TerminationDate" : null
+    }
+}
