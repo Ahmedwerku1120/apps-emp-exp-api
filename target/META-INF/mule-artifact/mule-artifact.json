@@ -1,0 +1,41 @@
+{
+  "configs": [
+    "global.xml",
+    "apps-emp-exp-api.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:apps-emp-exp-api1:1.0.1-SNAPSHOT",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/apps-emp-exp-api.raml",
+        "api/DataTypes/EmpdataType.raml",
+        "api/Documentations/documentation.raml",
+        "api/Examples/GetAllEmployeeExample.json",
+        "api/Examples/GetEmployeeByID.json",
+        "api/Examples/PostEmplyeeRequestExample.json",
+        "api/Examples/PostEmplyeeResponseExample.json",
+        "api/Examples/updateEmplyeeRequestExample.json",
+        "api/resourceType/empIDlibrary.raml",
+        "api/resourceType/empLibraries.raml",
+        "api/SecuritySchimes/securityScheme.raml",
+        "api/Traits/errorResponsTrait.raml",
+        "application-types.xml",
+        "apps-emp-exp-api.xml",
+        "global.xml",
+        "log4j2.xml",
+        "properties/dev.secure.yaml",
+        "properties/dev.yaml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

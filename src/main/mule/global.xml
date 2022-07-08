@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<http:listener-config name="apps-emp-exp-api-httpListenerConfig">
+        <http:listener-connection host="${http.host}" port="${http.port}" connectionIdleTimeout="${http.connection.timeout}"/>
+    </http:listener-config>
+    <configuration-properties doc:name="Configuration properties" doc:id="d363eeb0-fe17-446e-a276-c70d0b233e46" file="properties/${env}.yaml" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="680673d1-190a-481c-b317-418fb351b326" file="properties/${env}.secure.yaml" key="${secure.key}" >
+	</secure-properties:config>
+ <apikit:config name="apps-emp-exp-api-config" api="apps-emp-exp-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" disableValidations="true"/>
+    <db:config name="Database_Config2" doc:name="Database Config" doc:id="16016d4c-770b-4d3c-9e6a-6e405b803600" >
+		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${secure::db.username}" password="${secure::db.password}" database="${db.name}">
+			<reconnection >
+				<reconnect frequency="${db.reconnection.freq}" count="${db.reconnection.attempts}" />
+			</reconnection>
+		</db:my-sql-connection>
+	</db:config>
+		<api-gateway:autodiscovery apiId="${api.autoDiscoveryId}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="df49aae0-ece2-4d55-9158-6ba6b748d43f" flowRef="apps-emp-exp-api-main" />
+</mule>
+	

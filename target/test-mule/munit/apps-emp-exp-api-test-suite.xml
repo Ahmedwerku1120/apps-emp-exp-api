@@ -29,13 +29,6 @@
 				</error-handler>
 			</try>
 		</munit:execution>
-		<munit:validation >
-			<munit-tools:verify-call doc:name="Verify call" doc:id="06632fce-8b97-47e2-b081-90adec204330" processor="on-error-propagate" times="1">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="APIKIT:BAD_REQUEST" attributeName="type" />
-				</munit-tools:with-attributes>
-			</munit-tools:verify-call>
-		</munit:validation>
 	</munit:test>
 
 <munit:test name="apps-emp-exp-api-test-suite-apps-emp-exp-api-mainTest_notFound" doc:id="e622497f-03a9-46a0-917d-31d985e95799" description="Test">
@@ -60,14 +53,6 @@
 				</error-handler>
 			</try>
 		</munit:execution>
-		<munit:validation >
-			<munit-tools:verify-call doc:name="Verify call" doc:id="06632fce-8b97-47e2-b081-90adec204330" processor="on-error-propagate" times="1">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="APIKIT:NOT_FOUND" attributeName="type" />
-				</munit-tools:with-attributes>
-
-			</munit-tools:verify-call>
-		</munit:validation>
 	</munit:test>
 	<munit:test name="apps-emp-exp-api-test-suite-apps-emp-exp-api-mainTest_notAllowed" doc:id="e622497f-03a9-46a0-917d-31d985e95799" description="Test">
 		<munit:behavior>
@@ -91,15 +76,6 @@
 				</error-handler>
 			</try>
 		</munit:execution>
-		<munit:validation>
-			<munit-tools:verify-call doc:name="Verify call" doc:id="06632fce-8b97-47e2-b081-90adec204330" processor="on-error-propagate" times="1">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="APIKIT:METHOD_NOT_ALLOWED" attributeName="type" />
-				</munit-tools:with-attributes>
-
-
-			</munit-tools:verify-call>
-		</munit:validation>
 	</munit:test>
 
 

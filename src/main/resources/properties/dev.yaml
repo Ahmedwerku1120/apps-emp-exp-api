@@ -1,6 +1,16 @@
 http:
   host : "0.0.0.0"
   port : "8081"
+  connection:
+    timeout: "3000"
   
 api :
-  autoDiscoveryId : "17875997" 
+  autoDiscoveryId : "17875997"
+  
+db:
+  host: "employeedb.cugltcrmtvyp.us-east-1.rds.amazonaws.com"
+  port: "3306"
+  name: "empDB"
+  reconnection:
+    freq: "2000"
+    attempts: "3"
