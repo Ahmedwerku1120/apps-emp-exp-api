@@ -152,6 +152,46 @@ output application/json
 payload[0]]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+        <error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="c51b83d3-d73a-4171-9251-8bdb4148ca7a" type="DB:BAD_SQL_SYNTAX, DB:QUERY_EXECUTION, EXPRESSION">
+				<ee:transform doc:name="Transform Message" doc:id="84528a22-77cd-4336-b23a-03b31cf93dd0" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "There is something wrong with Input Record data"
+}
+]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[%dw 2.0
+output application/java
+---
+400]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="3a7d5b58-3754-49c9-81ed-630fa36321c4" >
+				<ee:transform doc:name="Transform Message" doc:id="2142e9b6-5397-4ee7-a231-577f11b1c3ff" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "There is something wrong with connection to database"
+}
+]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[%dw 2.0
+output application/java
+---
+500]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
     <flow name="get:\employees:apps-emp-exp-api-config">
 		<set-variable value='#[attributes.queryParams.TotalRespCount default "10"]' doc:name="TotalRespCount" doc:id="1fef6a01-4e0c-4382-b2bb-59d2455253a3" variableName="TotalRespCount"/>
@@ -180,7 +220,7 @@ output application/json
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+if(payload != []) payload else {"message" : "No employee found with Id : " ++ (vars.PNumber default "")}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
@@ -236,5 +276,45 @@ if(payload.affectedRows == 1) vars.inputPayload else payload]]></ee:set-payload>
             </ee:message>
         </ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="1f2fd859-6a2c-4387-b9f5-6379b5477413" message="#[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="c51b83d3-d73a-4171-9251-8bdb4148ca7a" type="DB:BAD_SQL_SYNTAX, DB:QUERY_EXECUTION, EXPRESSION">
+				<ee:transform doc:name="Transform Message" doc:id="84528a22-77cd-4336-b23a-03b31cf93dd0" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "There is something wrong with Input Record data"
+}
+]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[%dw 2.0
+output application/java
+---
+400]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="3a7d5b58-3754-49c9-81ed-630fa36321c4" >
+				<ee:transform doc:name="Transform Message" doc:id="2142e9b6-5397-4ee7-a231-577f11b1c3ff" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "There is something wrong with connection to database"
+}
+]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[%dw 2.0
+output application/java
+---
+500]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
 </mule>
