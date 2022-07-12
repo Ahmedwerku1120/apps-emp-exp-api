@@ -149,7 +149,7 @@ payload]]></ee:set-payload>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-payload[0]]]></ee:set-payload>
+payload ++ {"links": [{ "rel":"employees", "href": "https://apps-emp-exp7.us-e1.cloudhub.io/api/employees/" ++ vars.PNumber, "action":"GET","types":["application/json"]}]}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
         <error-handler >
@@ -203,7 +203,7 @@ output application/java
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-{recordCount : sizeOf(payload), "startIndex": payload..person_number[0], "endIndex": payload..person_number[-1]} ++ { Employees : payload }]]></ee:set-payload>
+{recordCount : sizeOf(payload), "startIndex": payload..person_number[0], "endIndex": payload..person_number[-1]} ++ { Employees : payload map ($ ++ {"links": [{ "rel":"employees", "href": "https://apps-emp-exp7.us-e1.cloudhub.io/api/employees/" ++ $.person_number, "action":"GET","types":["application/json"]},{ "rel":"employees", "href": "https://apps-emp-exp7.us-e1.cloudhub.io/api/employees/" ++ $.person_number, "action":"PUT","types":["application/json"]}]})}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
@@ -220,7 +220,7 @@ output application/json
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-if(payload != []) payload else {"message" : "No employee found with Id : " ++ (vars.PNumber default "")}]]></ee:set-payload>
+if(payload != []) payload map ($ ++ {"links": [{ "rel":"employees", "href": "https://apps-emp-exp7.us-e1.cloudhub.io/api/employees/" ++ $.person_number, "action":"GET","types":["application/json"]},{ "rel":"employees", "href": "https://apps-emp-exp7.us-e1.cloudhub.io/api/employees/" ++ $.person_number, "action":"PUT","types":["application/json"]}]}) else {"message" : "No employee found with Id : " ++ (vars.PNumber default "")}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
